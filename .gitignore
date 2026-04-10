@@ -1,0 +1,88 @@
+# =========================
+# Unity generated folders
+# =========================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# =========================
+# Auto-generated IDE files
+# =========================
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# =========================
+# IDE folders
+# =========================
+.vs/
+.idea/
+.consulo/
+.gradle/
+ExportedObj/
+
+# =========================
+# Unity / package manager
+# =========================
+.upm/
+# Se existir localmente:
+# Packages/packages-lock.json
+
+# =========================
+# Crash / diagnostic / upgrade files
+# =========================
+sysinfo.txt
+UpgradeLog.htm
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Rider / VS Code optional
+# =========================
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# =========================
+# Ignore generated test / coverage output
+# =========================
+Coverage/
+TestResults/
+
+# =========================
+# Addressables / asset bundles output
+# =========================
+ServerData/
+StreamingAssets/aa/
+
+# =========================
+# Uncomment if you generate these locally
+# =========================
+# Assets/AssetStoreTools*
+# Assets/TextMesh Pro/Examples & Extras/
