@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Samples/XR Interaction Toolkit/3.0.10/Hands Interaction Demo/HandsDemoScene.unity
+    guid: 3ff35cecbcc52cc42945cf531638a60a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0d87148cee3c8a44bbc25827faff7a8d, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: edbc408623237da44b30b399379ba66d, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 2ad41339ec2bded48b9b3368117566b3, type: 2}
   m_UseUCBPForAssetBundles: 0
