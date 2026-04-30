@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using UnityEngine;
+using static System.Net.Mime.MediaTypeNames;
 
 public class VisualAcuityTaskManager : MonoBehaviour
 {
@@ -41,6 +43,9 @@ public class VisualAcuityTaskManager : MonoBehaviour
 
     [Header("Distance Correction")]
     public bool keepConstantEyeDistance = true;
+
+    [Header("Data Export")]
+    public string csvFileName = "VisualAcuityResults.csv";
 
     [Header("Target Scale")]
     public float initialTargetScale = 0.0426f;
@@ -456,6 +461,40 @@ public class VisualAcuityTaskManager : MonoBehaviour
         return planePoint;
     }
 
+    private void SaveEllipseToCSV(int ellipseIndex)
+    {
+        string filePath = Path.Combine(UnityEngine.Application.persistentDataPath, csvFileName);
+        bool fileExists = File.Exists(filePath);
+
+        // Abre o ficheiro para acrescentar dados (append: true)
+        using (StreamWriter sw = new StreamWriter(filePath, true))
+        {
+            // Se o ficheiro for novo, escreve o cabeçalho
+            if (!fileExists)
+            {
+                sw.WriteLine("Timestamp;EllipseIndex;Position;LogMAR;Decimal;Snellen");
+            }
+
+            EllipseConfig ellipse = ellipses[ellipseIndex];
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            foreach (EllipsePosition pos in orderedPositions)
+            {
+                float? logMAR = acuityThresholdLogMARByEllipse[ellipseIndex][pos];
+                float? decimalValue = acuityThresholdDecimalByEllipse[ellipseIndex][pos];
+
+                string logMARStr = logMAR.HasValue ? logMAR.Value.ToString("F2") : "null";
+                string decimalStr = decimalValue.HasValue ? decimalValue.Value.ToString("F2") : "null";
+                string snellenStr = logMAR.HasValue ? LogMARToSnellen6m(logMAR.Value) : "null";
+
+                // Escreve uma linha por cada posição da elipse concluída
+                sw.WriteLine($"{timestamp};{ellipseIndex + 1};" +
+                             $"{pos};{logMARStr};{decimalStr};{snellenStr}");
+            }
+        }
+        UnityEngine.Debug.Log($"Elipse {ellipseIndex + 1} Data saved in: {filePath}");
+    }
+
     private void PrintEllipseSummary(int ellipseIndex)
     {
         EllipseConfig ellipse = ellipses[ellipseIndex];
@@ -485,6 +524,7 @@ public class VisualAcuityTaskManager : MonoBehaviour
         }
 
         UnityEngine.Debug.Log("==================================================");
+        SaveEllipseToCSV(ellipseIndex);
     }
 
     private void FinishTask()
